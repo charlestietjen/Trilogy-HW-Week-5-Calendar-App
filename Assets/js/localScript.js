@@ -22,7 +22,7 @@ var createEvents = function(eventHour, eventInfo) {
         .addClass("hour d-inline-flex")
         .text(eventHour);
     var eventInfoEl = $("<p>")
-        .addClass("description textarea flex-fill")
+        .addClass("event-info description flex-fill")
         .text(eventInfo);
     var saveBtnEl = $("<p>")
         .addClass("saveBtn")
@@ -37,3 +37,33 @@ for (i = 0; i < wHours; i++){
     var hour = h + ":00"
     createEvents(hour, "Placeholder");
 };
+
+$(document).on("click", ".event-info", function() {
+    //get current text value
+    var text = $(this)
+        .text()
+        .trim();
+    
+    // replace p with textarea
+    var textInput = $("<textarea>")
+        .addClass("event-info description flex-fill")
+        .val(text);
+    $(this).replaceWith(textInput);
+
+    textInput.trigger("focus");
+});
+
+//unfocus event
+$(document).on("blur", "textarea", function(){
+    console.log("unfocus event")
+    // get current value
+    var text = $(this).val();
+
+    //recreate p
+    var eventP = $("<p>")
+        .addClass("event-info description flex-fill")
+        .text(text);
+
+    //replace textarea with new p
+    $(this).replaceWith(eventP);
+});
