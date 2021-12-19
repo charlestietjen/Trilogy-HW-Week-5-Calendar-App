@@ -5,6 +5,7 @@ var monthNameArray = ["January", "February", "March", "April", "May", "June", "J
 var currentWeekDay = weekDayArray[dateTime.$W];
 var currentMonth = monthNameArray[dateTime.$M];
 var currentCalDay = dateTime.$D + 1;
+var currentHour = dateTime.$H;
 
 const wHours = 8;
 
@@ -16,17 +17,20 @@ dateEl.innerHTML = currentWeekDay + " " + currentMonth + " " + currentCalDay + "
 var events = {};
 
 // function for creating each hour element
-var createEvents = function(eventHour, eventInfo) {
-    var eventLi = $("<li>").addClass("time-block list-group-item d-flex");
+var createEvents = function(eventHour, eventInfo, eventTense) {
+    var eventLi = $("<li>").addClass(eventTense + " time-block list-group-item d-flex");
     var eventHourEl = $("<p>")
         .addClass("hour d-inline-flex")
         .text(eventHour);
-    var eventInfoEl = $("<p>")
-        .addClass("event-info description flex-fill")
+    var eventInfoEl = $("<div>")
+        .addClass("description flex-fill")
+    var eventInfoPEl = $("<p>")
+        .addClass("event-info")
         .text(eventInfo);
     var saveBtnEl = $("<p>")
-        .addClass("saveBtn")
+        .addClass("saveBtn") 
         .html("&#9760");
+    eventInfoEl.append(eventInfoPEl);
     eventLi.append(eventHourEl, eventInfoEl, saveBtnEl); //skull and crossbones unicode is placeholder because it is funny/cool
 
     $("#timeblocks").append(eventLi);
@@ -35,7 +39,14 @@ var createEvents = function(eventHour, eventInfo) {
 for (i = 0; i < wHours; i++){
     var h = i + 9;
     var hour = h + ":00"
-    createEvents(hour, "Placeholder");
+    var tense = "past";
+    if (h === currentHour){
+        tense = "present";
+    }
+    else if (currentHour < h){
+        tense = "future";
+    }
+    createEvents(hour, "Placeholder", tense);
 };
 
 $(document).on("click", ".event-info", function() {
@@ -67,3 +78,14 @@ $(document).on("blur", "textarea", function(){
     //replace textarea with new p
     $(this).replaceWith(eventP);
 });
+
+function reloadCss()
+{
+    var links = document.getElementsByTagName("link");
+    for (var cl in links)
+    {
+        var link = links[cl];
+        if (link.rel === "stylesheet")
+            link.href += "";
+    }
+};
