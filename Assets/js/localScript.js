@@ -1,10 +1,10 @@
 // Grab the time, day and date as in an object, using Day.js as an alternative to legacy moment.js provided
 var dateTime = dayjs();
-var weekDayArray = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+var weekDayArray = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 var monthNameArray = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 var currentWeekDay = weekDayArray[dateTime.$W];
 var currentMonth = monthNameArray[dateTime.$M];
-var currentCalDay = dateTime.$D + 1;
+var currentCalDay = dateTime.$D;
 var currentHour = dateTime.$H;
 
 const wHours = 8;
@@ -19,17 +19,17 @@ var events = {};
 // function for creating each hour element
 var createEvents = function(eventHour, eventInfo, eventTense) {
     var eventLi = $("<li>").addClass(eventTense + " time-block list-group-item d-flex");
-    var eventHourEl = $("<p>")
-        .addClass("hour d-inline-flex")
+    var eventHourEl = $("<div>")
+        .addClass("hour")
         .text(eventHour);
     var eventInfoEl = $("<div>")
         .addClass("description flex-fill")
     var eventInfoPEl = $("<p>")
         .addClass("event-info")
         .text(eventInfo);
-    var saveBtnEl = $("<p>")
+    var saveBtnEl = $("<button>")
         .addClass("saveBtn") 
-        .html("&#9760");
+        .html("Save");
     eventInfoEl.append(eventInfoPEl);
     eventLi.append(eventHourEl, eventInfoEl, saveBtnEl); //skull and crossbones unicode is placeholder because it is funny/cool
 
@@ -79,13 +79,4 @@ $(document).on("blur", "textarea", function(){
     $(this).replaceWith(eventP);
 });
 
-function reloadCss()
-{
-    var links = document.getElementsByTagName("link");
-    for (var cl in links)
-    {
-        var link = links[cl];
-        if (link.rel === "stylesheet")
-            link.href += "";
-    }
-};
+// save
