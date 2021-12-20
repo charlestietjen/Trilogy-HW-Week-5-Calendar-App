@@ -18,22 +18,24 @@ var events = {};
 
 // function for creating each hour element
 var createEvents = function(eventHour, eventInfo, eventTense) {
-    var eventLi = $("<li>").addClass(eventTense + " time-block list-group-item d-flex");
+    var eventLiEl = $("<li>").addClass("time-block list-group-item row");
+    var eventContainerEl = $("<div>")
+        .addClass("container row");
     var eventHourEl = $("<div>")
-        .addClass("hour")
+        .addClass("hour col-1")
         .text(eventHour);
     var eventInfoEl = $("<div>")
-        .addClass("description flex-fill")
+        .addClass(eventTense + " description col-sm col-10")
     var eventInfoPEl = $("<p>")
         .addClass("event-info")
         .text(eventInfo);
     var saveBtnEl = $("<button>")
-        .addClass("saveBtn") 
+        .addClass("saveBtn col-2") 
         .html("Save");
     eventInfoEl.append(eventInfoPEl);
-    eventLi.append(eventHourEl, eventInfoEl, saveBtnEl); //skull and crossbones unicode is placeholder because it is funny/cool
-
-    $("#timeblocks").append(eventLi);
+    eventContainerEl.append(eventHourEl, eventInfoEl, saveBtnEl); //skull and crossbones unicode is placeholder because it is funny/cool
+    eventLiEl.append(eventContainerEl);
+    $("#timeblocks").append(eventLiEl);
 }
 
 for (i = 0; i < wHours; i++){
@@ -46,7 +48,7 @@ for (i = 0; i < wHours; i++){
     else if (currentHour < h){
         tense = "future";
     }
-    createEvents(hour, "Placeholder", tense);
+    createEvents(hour, "Free Time", tense);
 };
 
 $(document).on("click", ".event-info", function() {
@@ -66,7 +68,7 @@ $(document).on("click", ".event-info", function() {
 
 //unfocus event
 $(document).on("blur", "textarea", function(){
-    console.log("unfocus event")
+    //console.log("unfocus event")
     // get current value
     var text = $(this).val();
 
