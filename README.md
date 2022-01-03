@@ -4,6 +4,8 @@ Create a simple calendar application that allows the user to save events for eac
 
 The provided starter code had moment.js attached but I opted to use dayjs instead since moment is deprecated. 
 
+All criteria for acceptance has been met with the exception of saving and loading events. My instructor has communicated to our class that our assignment deadlines have been extended to January 4th 2022 so I intend on updating this and resubmitting with full acceptance criteria met by then.
+
 ## Acceptance Criteria
 
 ```
@@ -22,17 +24,3 @@ WHEN I refresh the page
 THEN the saved events persist
 ```
 
-The following animation demonstrates the application functionality:
-
-![Work Day Scheduler app with color-coded time slots shows a new event being typed in the 5PM slot.](./Assets/05-third-party-apis-homework-demo.gif)
-
-## Review
-
-You are required to submit the following for review:
-
-* The URL of the deployed application.
-
-* The URL of the GitHub repository. Give the repository a unique name and include a README describing the project.
-
----
-© 2021 Trilogy Education Services, LLC, a 2U, Inc. brand. Confidential and Proprietary. All Rights Reserved.

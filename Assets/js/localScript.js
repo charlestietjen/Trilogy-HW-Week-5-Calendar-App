@@ -33,7 +33,7 @@ var createEvents = function(eventHour, eventInfo, eventTense) {
         .addClass("saveBtn col-2") 
         .html("Save");
     eventInfoEl.append(eventInfoPEl);
-    eventContainerEl.append(eventHourEl, eventInfoEl, saveBtnEl); //skull and crossbones unicode is placeholder because it is funny/cool
+    eventContainerEl.append(eventHourEl, eventInfoEl, saveBtnEl);
     eventLiEl.append(eventContainerEl);
     $("#timeblocks").append(eventLiEl);
 }
@@ -71,14 +71,18 @@ $(document).on("blur", "textarea", function(){
     //console.log("unfocus event")
     // get current value
     var text = $(this).val();
+    if (text.trim() === "") {
+        text = "Free Time";
+    };
 
     //recreate p
     var eventP = $("<p>")
         .addClass("event-info description flex-fill")
         .text(text);
-
+    
     //replace textarea with new p
     $(this).replaceWith(eventP);
 });
 
 // save
+
